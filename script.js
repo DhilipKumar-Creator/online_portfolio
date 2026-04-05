@@ -5,6 +5,27 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ── THEME TOGGLE ──
+  const themeToggle = document.getElementById('themeToggle');
+  const body = document.body;
+
+  // Load saved theme preference (default to dark)
+  const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+  body.setAttribute('data-theme', savedTheme);
+
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('portfolio-theme', newTheme);
+
+    // Animate the toggle button
+    themeToggle.style.transform = 'rotate(360deg) scale(1.1)';
+    setTimeout(() => {
+      themeToggle.style.transform = '';
+    }, 400);
+  });
+
   // ── TYPING EFFECT ──
   const typedEl = document.getElementById('typedText');
   const phrases = [
